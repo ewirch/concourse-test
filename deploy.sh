@@ -2,7 +2,11 @@
 
 set -euo pipefail
 
-fly login -t concourse -u test -p test -c http://web:8080
+fly login \
+	-t concourse -u test -p test -c http://web:8080
+
+fly sync \
+	--target=concourse
 
 fly set-pipeline \
 	--target=concourse \
