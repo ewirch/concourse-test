@@ -1,0 +1,10 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: 'depop/concourse-fly'
+    tag: '4.2.2'
+inputs:
+  - src
+run:
+  path: src/deploy.sh

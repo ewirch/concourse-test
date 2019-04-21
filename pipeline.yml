@@ -5,34 +5,9 @@ resources:
       uri: https://github.com/ewirch/concourse-test.git
 
 jobs:
-  - name: build
+  - name: build backend
     plan:
       - get: src
         trigger: true
-      - aggregate:
-          - task: build
-            config:
-              platform: linux
-              image_resource:
-                type: docker-image
-                source:
-                  repository: busybox
-              inputs:
-                - name: src
-              run:
-                path: build.sh
-              outputs:
-                - name: out
-          - task: test
-            config:
-              platform: linux
-              image_resource:
-                type: docker-image
-                source:
-                  repository: busybox
-              inputs:
-                - name: src
-                - name: out
-              run:
-                path: cat
-                args: ['out/build-out']
+      - task: run fly
+        file: src/concourse-fly.yml
