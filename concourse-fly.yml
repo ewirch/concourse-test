@@ -5,6 +5,6 @@ image_resource:
     repository: 'depop/concourse-fly'
     tag: '4.2.2'
 inputs:
-  - src
+  - name: src
 run:
   path: src/deploy.sh
